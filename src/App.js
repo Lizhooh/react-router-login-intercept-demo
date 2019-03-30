@@ -6,7 +6,7 @@ import routes from './routes';
 import Loading from './components/Loading';
 import { actions } from './stores';
 
-const action = actions.login;
+const action = actions.user;
 
 class App extends Component {
     componentDidMount() {
@@ -17,7 +17,7 @@ class App extends Component {
         );
     }
     render() {
-        const { isLogin, checkEnd } = this.props.login;
+        const { isLogin, checkEnd } = this.props.user;
         if (!isLogin && !checkEnd) return <Loading />;
 
         return (
@@ -33,6 +33,6 @@ class App extends Component {
 }
 
 export default connect(
-    state => ({ login: state.login }),
+    state => ({ user: state.user }),
 )(withRouter(App));
 

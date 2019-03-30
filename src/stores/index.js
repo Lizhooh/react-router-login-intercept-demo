@@ -1,12 +1,12 @@
 import Easy, { createModel } from 'redux-easy-action';
 
-import LoginModel from './model/login';
+import UserModel from './model/user';
 
-const easy = Easy({
+const easy = new Easy({
     devtool: true,
     initState: {},
     model: {
-        login: createModel('login', LoginModel),
+        user: createModel('user', UserModel),
     },
 });
 

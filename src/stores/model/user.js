@@ -1,5 +1,4 @@
 
-
 export default ({ commit, getState }) => ({
     initState: {
         isLogin: false,         // 是否已经登录了
@@ -16,7 +15,7 @@ export default ({ commit, getState }) => ({
         // 检查通过了
         // commit({ isLogin: true });
         // 检测不通过
-        commit({ checkEnd: true });
         failCallback();
+        commit({ checkEnd: true });
     },
 });
