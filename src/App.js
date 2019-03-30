@@ -1,28 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import routes from './routes';
+import Loading from './components/Loading';
+import { actions } from './stores';
+
+const action = actions.login;
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    componentDidMount() {
+        const { location, history } = this.props;
+        action.checkLoginState(
+            location.pathname,
+            () => history.replace('/login'),
+        );
+    }
+    render() {
+        const { isLogin, checkEnd } = this.props.login;
+        if (!isLogin && !checkEnd) return <Loading />;
+
+        return (
+            <div>
+                <Switch>
+                    {routes.map((item, index) => (
+                        <Route key={index} {...item} />
+                    ))}
+                </Switch>
+            </div>
+        );
+    }
 }
 
-export default App;
+export default connect(
+    state => ({ login: state.login }),
+)(withRouter(App));
+
