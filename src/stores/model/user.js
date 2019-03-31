@@ -7,10 +7,11 @@ export default ({ commit, getState }) => ({
 
     _wati: time => new Promise(rs => setTimeout(rs, time)),
     // 检查登录状态
-    async checkLoginState(path, failCallback = _ => _) {
-        if (path === '/login') {
+    async checkLoginState(path, list = [], failCallback = _ => _) {
+        if (!list.includes(path)) {
             return commit({ checkEnd: true });
         }
+
         await this._wati(1000);
         // 检查通过了
         // commit({ isLogin: true });

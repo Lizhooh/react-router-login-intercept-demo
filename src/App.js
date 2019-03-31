@@ -13,6 +13,7 @@ class App extends Component {
         const { location, history } = this.props;
         action.checkLoginState(
             location.pathname,
+            routes.filter(i => i.auth).map(i => i.path),
             () => history.replace('/login'),
         );
     }

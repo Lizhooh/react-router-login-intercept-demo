@@ -15,6 +15,7 @@ export default [
     },
     {
         path: '/user',
+        auth: true,
         component: User,
     },
 ];
